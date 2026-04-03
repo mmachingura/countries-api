@@ -7,7 +7,7 @@ export const countryAPI = createApi({
     baseQuery: fetchBaseQuery({ baseUrl }),
     endpoints: (builder) => ({
         getCountries: builder.query({
-            query: () => "/all?fields=name,capital,currencies"
+            query: () => "/all?fields=name,capital,flags,region,population"
         })
     })
 })
