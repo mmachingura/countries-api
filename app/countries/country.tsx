@@ -11,11 +11,11 @@ const Country = ({country}) => {
   }
 
   return (
-    <div className='w-70 sm:w-76 h-80 flex flex-col justify-between bg-white shadow-lg rounded overflow-hidden'>
+    <div className='w-70 h-86 flex flex-col justify-between bg-white shadow-lg rounded overflow-hidden'>
       <div className='relative h-40'>
         <Image src={country.flags.png} alt={country.flags.alt} fill sizes='auto' priority />
       </div>
-      <div className='w-full h-40 flex flex-col items-start px-4 py-6 justify-between'>
+      <div className='w-full h-42 flex flex-col items-start px-4 pt-4 pb-10 justify-between'>
         <div>
           <p className='text-grey-950 font-black'>{country.name.official}</p>
         </div>

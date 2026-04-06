@@ -8,10 +8,18 @@ export const countryAPI = createApi({
     endpoints: (builder) => ({
         getCountries: builder.query({
             query: () => "/all?fields=name,capital,flags,region,population"
+        }),
+        getCountry: builder.query({
+            query: (name) => `name/${name}?fullText=true`
+        }),
+        getCountriesWithCode: builder.query({
+            query: () => "/all?fields=name,cca3"
         })
     })
 })
 
 export const {
     useGetCountriesQuery,
+    useGetCountryQuery,
+    useGetCountriesWithCodeQuery,
 } = countryAPI;
