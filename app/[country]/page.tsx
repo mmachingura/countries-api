@@ -1,25 +1,29 @@
 'use client'
 import React from 'react'
+import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import { useGetCountriesWithCodeQuery, useGetCountryQuery } from '@/services/countryAPI'
+import Link from 'next/link'
 
-const Page = () => {
+export default function Page() {
 
+    const params = useParams<{ country: string }>()
+    
     const thousands_separators = (num: number) => {
-      const num_parts = num.toString().split(".");
-      num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      return num_parts.join(".");
+        const num_parts = num.toString().split(".");
+        num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return num_parts.join(".");
     }
-
-    const { data } = useGetCountryQuery('Zimbabwe');
     
     const { data: countries, isFetching } = useGetCountriesWithCodeQuery();
     
-    if(isFetching) return (<>Loading</>)
+    const { data, isFetching : fetching } = useGetCountryQuery(params.country);
+    
+    
+    if(isFetching || fetching) return (<>Loading</>)
     
     const country = data[0]
     const nativeName = country.name.nativeName
-    console.log(country)
 
     const officialNativeName = (name: object) => {
 
@@ -63,9 +67,11 @@ const Page = () => {
         <div className='py-8'>
             <h1 className='font-extrabold'>Border Countries</h1>
             <div className='flex justify-start w-full h-auto flex-wrap py-4 items-start gap-2'>
-                {country.borders.map((code: string, index: number) => (
+                {country.borders?.map((code: string, index: number) => (
                     <span key={index} className='py-2 px-3 bg-white shadow-md'>
-                        {resolveCountry(code)}
+                        <Link href={`/${resolveCountry(code)}`} className=''>
+                            {resolveCountry(code)}
+                        </Link>
                     </span>
                 ))}
             </div>
@@ -73,5 +79,3 @@ const Page = () => {
     </div>
   )
 }
-
-export default Page;
