@@ -24,8 +24,8 @@ const Country = () => {
         {countries?.map((country, index: number) => (
           <Link key={index} href={`/${country.name.official}`}>
             <div className='w-70 h-86 flex flex-col justify-between bg-white shadow-lg rounded overflow-hidden'>
-              <div className='relative h-40'>
-                <Image src={country.flags.png} alt={country.flags.alt} fill sizes='auto' priority />
+              <div className='relative h-auto w-full max-w-75 aspect-7/5'>
+                <Image src={country.flags.png} alt={country.flags.alt} fill sizes='auto' className='object-cover' priority />
               </div>
               <div className='w-full h-42 flex flex-col items-start px-4 pt-4 pb-10 justify-between'>
                 <div>
